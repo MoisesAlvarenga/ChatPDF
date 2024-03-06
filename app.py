@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import text
+from utils import chatbot, text
 
 def main():
 
@@ -11,7 +11,11 @@ def main():
 
         if st.button('Processar'):
             all_files_text = text.process_files(pdf_docs)
-            print(all_files_text)
+            
+            chunks = text.create_text_chunks(all_files_text)
+            
+            vectorstore = chatbot.create_vectorstore(chunks)
+
 
 
 if __name__ == '__main__':
